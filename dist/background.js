@@ -1,0 +1,1 @@
+chrome.runtime.onMessage.addListener((function(e,o,s){"data_from_content"===e.message&&(console.log("Message received in background script:",e),chrome.runtime.sendMessage({message:"data_from_content",data:e.data},(function(e){console.log("Message forwarded to popup script")})))}));
