@@ -1,10 +1,12 @@
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-    if (request.message === "data_from_content") {
-      console.log("Message received in background script:", request); // Log received message
-      // Forward the message to popup.js
-      chrome.runtime.sendMessage({ message: "data_from_content", data: request.data }, function(response) {
-        console.log("Message forwarded to popup script");
-      });
-    }
-  });
+// chrome.tabs.onUpdated.addListener(
+//   function(tabId, changeInfo, tab) {
+//     // send the new url to contentscripts.js
+//     if (changeInfo && changeInfo?.url && changeInfo?.url?.includes('youtube.com/watch?v=')) {
+//       chrome.tabs.sendMessage( tabId, {
+//         message: 'URL_Changed',
+//       })
+//       console.log("URL changed to:"+changeInfo.url)
+//     }
+//   }
+// );
   
