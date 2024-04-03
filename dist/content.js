@@ -1,1 +1,0 @@
-chrome.runtime.onMessage.addListener((function(e,n,o){console.log(n.origin+" sender in content.js"),"start"===e.message&&(console.log("Message received in content.js:",e),chrome.runtime.sendMessage({message:"data_from_content",data:"Data from content.js"},(function(e){console.log("Message sent from content.js to popup.js")})))}));
