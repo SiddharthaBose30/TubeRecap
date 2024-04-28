@@ -35,7 +35,9 @@ module.exports = {
         new CopyPlugin({
             patterns: [
                 { from: "manifest.json", to: "../manifest.json" },
-                { from: "src/background.js",to: "../background.js"}
+                { from: "src/background.js",to: "../background.js"},
+                { from: "src/youtube-logo.svg",to: "youtube-logo.svg"},
+                { from: "src/extension-logo.png",to: "extension-logo.png"}
             ],
         }),
         ...getHtmlPlugins(["index"]),

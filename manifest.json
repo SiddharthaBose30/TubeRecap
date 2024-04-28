@@ -7,6 +7,11 @@
       "activeTab",
       "webNavigation"
     ],
+    "icons": {
+      "16": "js/extension-logo.png",
+      "48": "js/extension-logo.png",
+      "128": "js/extension-logo.png"
+  },
     "description": "This is a Chrome extension built with React and TypeScript for summarizing Youtube Videos on the go",
     "browser_action": {
         "default_popup": "js/index.html",
