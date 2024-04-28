@@ -1,11 +1,84 @@
-.App {
-  color: white;
-  text-align: center;
+body {
+  background: linear-gradient(135deg,rgb(232, 159, 50),rgb(246, 230, 164));
 }
 
 .container {
-  width: 15rem;
-  height: 15rem;
-  background-color: green;
+  align-items: center;
+  justify-content: center;
+  margin-top: 7px; /* Reduced margin */
+  max-width: 600px;
+  background: linear-gradient(135deg,#f0f0f0, #dcdcdc);
+  padding: 12px; /* Reduced padding */
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
 
+h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+  color: #222;
+  font-family: 'Roboto', Arial, sans-serif;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background: linear-gradient(135deg, #0055FF, #0033CC); /* Gradient background for button */
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #0044CC, #002299); /* Darker gradient on hover */
+}
+
+.loading-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -2px;
+}
+
+.message {
+  font-size: 20px;
+  font-weight: bold;
+  margin-right: 10px;
+  color: #007bff;
+}
+
+.loader {
+  border: 6px solid rgba(0, 0, 0, 0.1);
+  border-top: 6px solid #007bff;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.summary-box {
+  border: 2px solid #0055FF;
+  border-radius: 12px;
+  padding: 15px;
+  margin-top: 10px;
+  text-align: center;
+  background: linear-gradient(135deg, #f8f8f8, #e6e6e6); /* Gradient background for summary box */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.summary-box h2 {
+  font-size: 28px;
+  margin-bottom: 12px;
+  color: #222;
+}
+
+.summary-box p {
+  font-size: 18px;
+  color: #555;
 }
