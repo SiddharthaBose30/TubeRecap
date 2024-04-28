@@ -28,5 +28,9 @@ TubeRecap is a Chrome extension built using React that allows users to summarize
 5. Click on "Load unpacked" and select the `build` folder from the project directory.
 6. The TubeRecap extension should now be installed and ready to use.
 
+## Sample Image
+
+<img src="/src/Sample-image.png" alt="Sample Image" width="400">
+
 ## Contributing
 Contributions are welcome! Please feel free to submit a pull request or open an issue if you encounter any bugs or have any suggestions for improvements.   
