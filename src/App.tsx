@@ -9,8 +9,8 @@ function App() {
   const [buttonVisible, setButtonVisible] = useState(true);
   const [isGeneratingSummary, setIsGeneratingSummary] = useState(false); // Track if summary generation is in progress
 
-  const chunkSize = 300;
-  const overlapSize = 50;
+  const chunkSize = 1000;
+  const overlapSize = 100;
 
   const openai = new OpenAI({
     apiKey: '<Your_API_KEY>', 
