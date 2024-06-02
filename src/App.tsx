@@ -13,7 +13,7 @@ function App() {
   const overlapSize = 100;
 
   const openai = new OpenAI({
-    apiKey: '<Your_API_Key>',
+    apiKey: 'YOUR_API_KEY',
     dangerouslyAllowBrowser: true
   });
 
