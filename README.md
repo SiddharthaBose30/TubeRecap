@@ -38,7 +38,7 @@ Experience the future of video consumption with TubeRecap. Streamline your learn
 ## Sample Image
 
 <img src="/src/Sample-image.png" alt="Sample Image" width="200">
-<img src="demo.png" alt="Sample Output" width="400">
+<img src="demo.png" alt="Sample Output" width="600" heigh="600">
 
 ## Contributing
 Contributions are welcome! Please feel free to submit a pull request or open an issue if you encounter any bugs or have any suggestions for improvements.   
