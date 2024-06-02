@@ -27,6 +27,7 @@ Experience the future of video consumption with TubeRecap. Streamline your learn
    git clone https://github.com/SiddharthaBose30/TubeRecap.git
    cd TubeRecap 
    npm install
+   update the API_KEY in App.tsx from OpenAI APIs dashboard
    npm run build
 2. Load the extension in Chrome
 3. Open Chrome and go to `chrome://extensions/`.
@@ -36,7 +37,8 @@ Experience the future of video consumption with TubeRecap. Streamline your learn
 
 ## Sample Image
 
-<img src="/src/Sample-image.png" alt="Sample Image" width="400">
+<img src="/src/Sample-image.png" alt="Sample Image" width="200">
+<img src="demo.png" alt="Sample Output" width="600" heigh="600">
 
 ## Contributing
 Contributions are welcome! Please feel free to submit a pull request or open an issue if you encounter any bugs or have any suggestions for improvements.   
