@@ -56,7 +56,7 @@ function App() {
 
   useEffect(() => {
     if (transcriptData.length > 0) {
-      const transcriptText = transcriptData.map(item => item.text).join(' ');
+      const transcriptText = transcriptData?.map(item => item?.text).join(' ');
       const chunks = splitTranscriptIntoChunks(transcriptText);
       const initialRequest = "I will be providing YouTube transcript data of a video. You need to summarize it for me. I will send the data in chunks, and I want an overall summary. Now remember, every summary response you give me, make sure to make a proper point of its own. Don't just follow up from previous chunks. Make it a new point with proper beginning and end.";
       summarizeTranscript(chunks, initialRequest);
@@ -99,7 +99,7 @@ function App() {
         <div className="summary">
           <div className="summary-box">
             <h2>Summary</h2>
-            {summaryPoints.map((point, index) => (
+            {summaryPoints?.map((point, index) => (
               <div key={index} className="summary-point">
                 <div className="chapter-number">Part {index + 1}</div>
                 <p>{point}</p>
