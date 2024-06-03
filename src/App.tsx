@@ -1,21 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import OpenAI from 'openai';
 
 function App() {
   const [transcriptData, setTranscriptData] = useState<any[]>([]);
   const [summaryPoints, setSummaryPoints] = useState<string[]>([]);
   const [summary, setSummary] = useState(false);
   const [buttonVisible, setButtonVisible] = useState(true);
-  const [isGeneratingSummary, setIsGeneratingSummary] = useState(false); // Track if summary generation is in progress
+  const [isGeneratingSummary, setIsGeneratingSummary] = useState(false);
 
   const chunkSize = 1000;
   const overlapSize = 100;
-
-  const openai = new OpenAI({
-    apiKey: 'YOUR_API_KEY',
-    dangerouslyAllowBrowser: true
-  });
 
   const splitTranscriptIntoChunks = (text: string) => {
     const words = text.split(' ');
@@ -26,36 +20,22 @@ function App() {
     return chunks;
   };
 
-  const summarizeChunk = async (chunk: string, initialRequest: string, previousSummaries: string[], isInitial: boolean) => {
-    const messages = isInitial
-      ? [
-          { role: "system", content: "You are a helpful assistant designed to summarize YouTube videos." },
-          { role: "user", content: initialRequest },
-          { role: "user", content: `${chunk}` }
-        ]
-      : [
-          { role: "user", content: "Here is the previous summary context: " + previousSummaries.join('\n') +"\n"+"Now in my next message or request, I will give you the next part of the video to summarize. Also, start the response like a sentence, like a whole new point but still maintaining the previous context. Also, don't include chapter numbers."},
-          { role: "user", content: "Summarize the following: " + chunk }
-        ];
-
-    const completion = await openai.chat.completions.create({
-      messages: messages as OpenAI.Chat.Completions.ChatCompletionMessageParam[],
-      model: "gpt-3.5-turbo-0125",
-    });
-    return completion?.choices[0]?.message?.content?.trim() ?? '';
-  };
-
   const summarizeTranscript = async (transcriptChunks: string[], initialRequest: string) => {
     setIsGeneratingSummary(true);
-    let summaryPoints: string[] = [];
-    let isInitial = true;
-    for (let chunk of transcriptChunks) {
-      const summary = await summarizeChunk(chunk, initialRequest, summaryPoints, isInitial);
-      summaryPoints.push(summary);
-      isInitial = false;
+    try {
+      const response = await fetch('https://tuberecapopenaiapis.azurewebsites.net/api/HttpTrigger1?code=4HPNm4sXWrZyDghWMT56WICdvilYYeNklONTt2GmEuzhAzFuP5lM1g%3D%3D', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ transcriptChunks, initialRequest })
+      });
+      const data = await response.json();
+      setSummaryPoints(data.summaryPoints);
+    } catch (error) {
+      console.error('Error summarizing transcript:', error);
     }
     setIsGeneratingSummary(false);
-    return summaryPoints;
   };
 
   const popup = () => {
@@ -79,9 +59,7 @@ function App() {
       const transcriptText = transcriptData.map(item => item.text).join(' ');
       const chunks = splitTranscriptIntoChunks(transcriptText);
       const initialRequest = "I will be providing YouTube transcript data of a video. You need to summarize it for me. I will send the data in chunks, and I want an overall summary. Now remember, every summary response you give me, make sure to make a proper point of its own. Don't just follow up from previous chunks. Make it a new point with proper beginning and end.";
-      summarizeTranscript(chunks, initialRequest)
-        .then(summaryPoints => { console.log(summaryPoints); setSummaryPoints(summaryPoints); })
-        .catch(error => console.error('Error summarizing transcript:', error));
+      summarizeTranscript(chunks, initialRequest);
     }
   }, [transcriptData]);
 
