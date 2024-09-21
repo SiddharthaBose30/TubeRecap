@@ -28,6 +28,7 @@ Experience the future of video consumption with TubeRecap. Streamline your learn
    cd TubeRecap 
    npm install
    update the API_KEY in App.tsx from OpenAI APIs dashboard
+   update the bing_api_key from Azure Dashboard API KEYs.
    npm run build
 2. Load the extension in Chrome
 3. Open Chrome and go to `chrome://extensions/`.
