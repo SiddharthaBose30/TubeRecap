@@ -1,7 +1,9 @@
 const fetch = require('node-fetch');
 
-const apiKey = '<API_KEY>';
+const apiKey = '<OPEN_AI_API_KEY>';
 const apiUrl = 'https://api.openai.com/v1/chat/completions';
+const bingApiKey = 'BING_SEARCH_API_KEY';
+const bingApiUrl = 'https://api.bing.microsoft.com/v7.0/search';
 
 async function summarizeChunk(chunk, initialRequest, previousSummaries, isInitial) {
   console.log('Received parameters:', { chunk, initialRequest, previousSummaries, isInitial });
@@ -28,7 +30,38 @@ async function summarizeChunk(chunk, initialRequest, previousSummaries, isInitia
 
   const response = await fetch(apiUrl, requestOptions);
   const data = await response.json();
-  return data.choices[0]?.message?.content?.trim() ?? '';
+  const summary = data.choices[0]?.message?.content?.trim() ?? '';
+
+  // Fetch related links using Bing Search API
+  const relatedLinks = await fetchRelatedLinks(summary);
+
+  // Return summary with related links
+  console.log(relatedLinks);
+  return { summary, links: relatedLinks };
+}
+
+async function fetchRelatedLinks(summary) {
+  const query = encodeURIComponent(summary);
+  const searchUrl = `${bingApiUrl}?q=${query}&count=3`;
+
+  const requestOptions = {
+    method: 'GET',
+    headers: {
+      'Ocp-Apim-Subscription-Key': bingApiKey
+    }
+  };
+
+  const response = await fetch(searchUrl, requestOptions);
+  const data = await response.json();
+
+  // Extract top 3 links from search results
+  const links = data.webPages?.value?.map(page => ({
+    name: page.name,
+    url: page.url,
+    snippet: page.snippet
+  })) || [];
+
+  return links;
 }
 
 module.exports = async function (context, req) {
@@ -63,8 +96,8 @@ module.exports = async function (context, req) {
         await new Promise(resolve => setTimeout(resolve, 3540));
       }
 
-      const summary = await summarizeChunk(chunk, initialRequest, summaryPoints, isInitial);
-      summaryPoints.push(summary);
+      const { summary, links } = await summarizeChunk(chunk, initialRequest, summaryPoints, isInitial);
+      summaryPoints.push({ summary, links });
       isInitial = false;
     }
 
