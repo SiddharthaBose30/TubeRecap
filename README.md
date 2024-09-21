@@ -27,8 +27,8 @@ Experience the future of video consumption with TubeRecap. Streamline your learn
    git clone https://github.com/SiddharthaBose30/TubeRecap.git
    cd TubeRecap 
    npm install
-   update the API_KEY in App.tsx from OpenAI APIs dashboard
-   update the bing_api_key from Azure Dashboard API KEYs.
+   update the API_KEY in azfn_TubeRecap.js from OpenAI APIs dashboard
+   update the bing_api_key in azfn_TubeRecap.js from Azure Dashboard API KEYs.
    npm run build
 2. Load the extension in Chrome
 3. Open Chrome and go to `chrome://extensions/`.
