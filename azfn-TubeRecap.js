@@ -33,10 +33,12 @@ async function summarizeChunk(chunk, initialRequest, previousSummaries, isInitia
   const summary = data.choices[0]?.message?.content?.trim() ?? '';
 
   // Fetch related links using Bing Search API
-  const relatedLinks = await fetchRelatedLinks(summary);
+  let relatedLinks = [];
+  if (summary.length > 150) { // Adjust this length based on your criteria
+    relatedLinks = await fetchRelatedLinks(summary);
+  }
 
   // Return summary with related links
-  console.log(relatedLinks);
   return { summary, links: relatedLinks };
 }
 
@@ -91,9 +93,9 @@ module.exports = async function (context, req) {
         continue;
       }
 
-      // Introduce a 3.54-second delay before each request
+      // Introduce a 4.54-second delay before each request
       if (i > 0) {
-        await new Promise(resolve => setTimeout(resolve, 3540));
+        await new Promise(resolve => setTimeout(resolve, 3740));
       }
 
       const { summary, links } = await summarizeChunk(chunk, initialRequest, summaryPoints, isInitial);
