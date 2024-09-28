@@ -19,6 +19,9 @@ Experience the future of video consumption with TubeRecap. Streamline your learn
 2. Click on the TubeRecap extension icon in the Chrome toolbar.
 3. The extension will summarize the video for you.
 
+## Link
+https://chromewebstore.google.com/detail/tuberecap/kmnpbafjldmofjhchfhgibhbndnmlakp
+
 ## Dev and Installation
 
 1. Clone the repository:
